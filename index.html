@@ -10,7 +10,7 @@
     <style>
         body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #000; touch-action: manipulation; }
 
-        /* --- PAGE 1: MOODY GOTHIC (Retained) --- */
+        /* --- PAGE 1: MOODY GOTHIC --- */
         #page-one {
             height: 100vh;
             background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.85)),
@@ -59,7 +59,7 @@
         @keyframes gothicVibrate { 0% { transform: translate(0); } 50% { transform: translate(-2px, 2px); } 100% { transform: translate(2px, -2px); } }
         .gothic-bat-btn:hover { animation: gothicVibrate 0.15s linear infinite; color: #fff; border-color: #fff; }
 
-        /* --- PAGE 2: SOFT AESTHETIC REVEAL (Retained) --- */
+        /* --- PAGE 2: SOFT AESTHETIC REVEAL --- */
         #page-two {
             height: 100vh; display: none; flex-direction: column; justify-content: center; align-items: center; text-align: center;
             background: radial-gradient(circle, #ffdee9 0%, #ff9a9e 100%);
@@ -88,45 +88,32 @@
             font-style: italic; font-weight: 500;
             color: #555; font-size: 1.15rem; line-height: 1.6;
             margin-top: 20px; padding: 15px; border: 1px solid #ffe4e1; border-radius: 12px; background: #fffafb;
-
-            overflow-y: auto;
-            flex-grow: 1;
-            text-align: left;
-            -webkit-overflow-scrolling: touch;
+            overflow-y: auto; flex-grow: 1; text-align: left; -webkit-overflow-scrolling: touch;
         }
 
         .message-content::-webkit-scrollbar { width: 6px; }
         .message-content::-webkit-scrollbar-track { background: #fffafb; }
         .message-content::-webkit-scrollbar-thumb { background: #ffb6c1; border-radius: 10px; }
 
-        .barbie-particle { position: absolute; pointer-events: none; z-index: 1; animation: floatUpBarbie 4s linear forwards; }
-        @keyframes floatUpBarbie {
-            0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
-            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        /* THE FLOATIES */
+        .barbie-particle {
+            position: absolute; pointer-events: none; z-index: 1;
+            animation: floatUpBarbie 4s linear forwards;
+            text-shadow: 0 0 10px rgba(255,255,255,0.8); /* Makes them pop more */
         }
 
-        /* --- MOBILE SPECIFIC FIXES --- */
+        @keyframes floatUpBarbie {
+            0% { transform: translateY(110vh) rotate(0deg) scale(0.5); opacity: 0; }
+            20% { opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(360deg) scale(1.2); opacity: 0; }
+        }
+
         @media (max-width: 480px) {
             .circle-frame { width: 180px; height: 180px; }
             .title-shrek { font-size: 1.8rem; }
-
-            /* SOURGICAL FIXES FOR YOUR REQUEST: */
-
-            /* 1. Reduce Box Dominance: Lowered height to show more background */
-            .friendship-box {
-                padding: 20px;
-                width: 85%;
-                height: 380px; /* WAS 450px - reduced to make the box smaller */
-            }
-
+            .friendship-box { padding: 20px; width: 85%; height: 380px; } /* Box is smaller to show background */
             .friendship-logo { font-size: 2.4rem; }
-            .message-content { font-size: 1.05rem; line-height: 1.5; }
-
-            /* 2. Fix Floaties and Background Visibility: Enhanced particle clarity on small screens */
-            .barbie-particle {
-                /* Makes the symbols (💖,✨,etc.) clearer against the pink background */
-                filter: opacity(0.9) brightness(1.2) contrast(1.1);
-            }
+            .message-content { font-size: 1.05rem; }
         }
     </style>
 </head>
@@ -174,29 +161,29 @@
             const rose = document.createElement('div');
             rose.classList.add('black-rose'); rose.innerHTML = '🌹';
             rose.style.left = Math.random() * 95 + 'vw';
-            rose.style.animationDuration = (Math.random() * 8 + 6) + 's';
             document.getElementById('page-one').appendChild(rose);
             setTimeout(() => rose.remove(), 12000);
         }
 
         function createParticles() {
-            const symbols = ['💖', '✨', '☁️', '🌸', '🤍', '⭐'];
+            const symbols = ['💖', '✨', '🌸', '🤍', '⭐'];
             const p = document.createElement('div');
             p.classList.add('barbie-particle');
             p.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
             p.style.left = Math.random() * 95 + 'vw';
-            p.style.animationDuration = (Math.random() * 2.5 + 2.5) + 's';
-            p.style.fontSize = (Math.random() * 20 + 20) + 'px';
+            p.style.fontSize = (Math.random() * 15 + 20) + 'px';
             document.getElementById('page-two').appendChild(p);
-            setTimeout(() => p.remove(), 5000);
+            // Particle lasts 4s based on CSS animation
+            setTimeout(() => p.remove(), 4000);
         }
 
         function revealFriendship() {
             const audio = document.getElementById('magicSound');
-            audio.play().catch(() => {}); // Catch mobile blocks
+            audio.play().catch(() => {});
             document.getElementById('page-one').style.display = 'none';
             document.getElementById('page-two').style.display = 'flex';
-            setInterval(createParticles, 150);
+            // Start the floaties immediately
+            setInterval(createParticles, 200);
         }
 
         setInterval(createBlackRose, 1000);

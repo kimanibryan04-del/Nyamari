@@ -10,7 +10,7 @@
     <style>
         body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #000; touch-action: manipulation; }
 
-        /* --- PAGE 1: MOODY GOTHIC --- */
+        /* --- PAGE 1: MOODY GOTHIC (Retained) --- */
         #page-one {
             height: 100vh;
             background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.85)),
@@ -59,7 +59,7 @@
         @keyframes gothicVibrate { 0% { transform: translate(0); } 50% { transform: translate(-2px, 2px); } 100% { transform: translate(2px, -2px); } }
         .gothic-bat-btn:hover { animation: gothicVibrate 0.15s linear infinite; color: #fff; border-color: #fff; }
 
-        /* --- PAGE 2: SOFT AESTHETIC REVEAL --- */
+        /* --- PAGE 2: SOFT AESTHETIC REVEAL (Retained) --- */
         #page-two {
             height: 100vh; display: none; flex-direction: column; justify-content: center; align-items: center; text-align: center;
             background: radial-gradient(circle, #ffdee9 0%, #ff9a9e 100%);
@@ -67,12 +67,10 @@
         }
 
         .friendship-box {
-            width: 90%; max-width: 340px;
-            max-height: 80vh; /* Keeps the box from getting too tall on phones */
+            width: 90%; max-width: 340px; height: 500px;
             background: white; border: 12px solid #ff69b4; border-radius: 10px;
             padding: 25px; position: relative; z-index: 100; box-shadow: 0 15px 40px rgba(255, 105, 180, 0.3);
-            animation: boxEnter 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            display: flex; flex-direction: column; /* Allows internal scrolling to work better */
+            animation: boxEnter 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: flex; flex-direction: column;
         }
 
         .friendship-box::after {
@@ -85,41 +83,50 @@
 
         .friendship-logo { font-family: 'Lobster', cursive; color: #ff69b4; font-size: 2.8rem; margin: 0; transform: rotate(-3deg); filter: drop-shadow(2px 2px 0px #fff); flex-shrink: 0; }
 
-        /* --- UPDATED SCROLLABLE CONTENT --- */
         .message-content {
             font-family: 'Playfair Display', serif;
-            font-style: italic;
-            font-weight: 500;
+            font-style: italic; font-weight: 500;
             color: #555; font-size: 1.15rem; line-height: 1.6;
             margin-top: 20px; padding: 15px; border: 1px solid #ffe4e1; border-radius: 12px; background: #fffafb;
 
-            overflow-y: auto; /* ENABLES SCROLL */
+            overflow-y: auto;
+            flex-grow: 1;
             text-align: left;
-            -webkit-overflow-scrolling: touch; /* Smooth scroll for iPhones */
+            -webkit-overflow-scrolling: touch;
         }
 
-        /* CUSTOM PINK SCROLLBAR */
         .message-content::-webkit-scrollbar { width: 6px; }
         .message-content::-webkit-scrollbar-track { background: #fffafb; }
         .message-content::-webkit-scrollbar-thumb { background: #ffb6c1; border-radius: 10px; }
 
-        .barbie-particle {
-            position: absolute; pointer-events: none; z-index: 1;
-            animation: floatUpBarbie 4s linear forwards;
-        }
-
+        .barbie-particle { position: absolute; pointer-events: none; z-index: 1; animation: floatUpBarbie 4s linear forwards; }
         @keyframes floatUpBarbie {
-            0% { transform: translateY(110vh) scale(0.6) rotate(0deg); opacity: 0; }
-            10% { opacity: 1; }
-            100% { transform: translateY(-10vh) scale(1.3) rotate(360deg); opacity: 0; }
+            0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
         }
 
+        /* --- MOBILE SPECIFIC FIXES --- */
         @media (max-width: 480px) {
             .circle-frame { width: 180px; height: 180px; }
             .title-shrek { font-size: 1.8rem; }
-            .friendship-box { padding: 20px; width: 85%; }
+
+            /* SOURGICAL FIXES FOR YOUR REQUEST: */
+
+            /* 1. Reduce Box Dominance: Lowered height to show more background */
+            .friendship-box {
+                padding: 20px;
+                width: 85%;
+                height: 380px; /* WAS 450px - reduced to make the box smaller */
+            }
+
             .friendship-logo { font-size: 2.4rem; }
-            .message-content { font-size: 1.05rem; }
+            .message-content { font-size: 1.05rem; line-height: 1.5; }
+
+            /* 2. Fix Floaties and Background Visibility: Enhanced particle clarity on small screens */
+            .barbie-particle {
+                /* Makes the symbols (💖,✨,etc.) clearer against the pink background */
+                filter: opacity(0.9) brightness(1.2) contrast(1.1);
+            }
         }
     </style>
 </head>
@@ -140,24 +147,24 @@
         <div class="friendship-box">
             <h1 class="friendship-logo">Friendship</h1>
             <div class="message-content">
-                The first day we met, I honestly thought we would never be friends at all! 🙅🏾‍♂️
+                The first day we met, I honestly thought we would never be friends at all! 🙅🏾‍♂️🚫
                 I really thought you’d just blow me off, but I took a risk just to try and make
-                at least one friend in Ruai 🏠 since I was already so bored with the place (and my life!).
+                at least one friend in Ruai 🏠 since I was already so bored with the place (and my life! 🥱💤).
                 <br><br>
-                I’ll never forget that day because it actually turned out to be the best decision of my life! ✨
-                I don’t regret it for a second. Every single day with you has been so much fun, and
-                I always hope the laughs never end. ♾️💖
+                I’ll never forget that day because it actually turned out to be the best decision of my life! 🏆✨
+                I don’t regret it for a second. 🥹 Every single day with you has always been so much fun, and
+                I always hoped that the fun would never end. ♾️💖
                 <br><br>
-                Even though there are times I regret meeting you (because you're a lot! 😂🤪),
-                I still want to enjoy every single moment we have. 📸🌸
+                Even though there are times I jokingly regret meeting you (because you're a lot! 😂🤪),
+                I still want to enjoy those moments every single day. 📸🌸
                 <br><br>
                 In short, all I want to say is thank you for everything! 🎁✨
-                I hope our friendship stays exactly as it is and never, ever fades. 👯‍♀️
-                Love you, Bestie! 🎀✨
+                I hope our friendship stays exactly as it is and never, ever fades. 🌈👯‍♀️
+                Love you, Bestie! 🎀🍭✨
                 <br><br>
                 Here's to more chaos, more laughs, and more days of me wondering how I haven't blocked you yet. 🥂✨
             </div>
-            <p style="color: aqua; font-size: 0.6rem; font-family: 'Montserrat', sans-serif; margin-top: 15px; letter-spacing: 2px; flex-shrink: 0;">BEST FRIEND EDITION | MADE WITH LOVE</p>
+            <p style="color: #ffb6c1; font-size: 0.6rem; font-family: 'Montserrat', sans-serif; margin-top: 10px; letter-spacing: 2px;">BEST FRIEND EDITION | MADE WITH LOVE</p>
         </div>
     </section>
 
@@ -165,8 +172,7 @@
         function createBlackRose() {
             if (document.getElementById('page-one').style.display === 'none') return;
             const rose = document.createElement('div');
-            rose.classList.add('black-rose');
-            rose.innerHTML = '🌹';
+            rose.classList.add('black-rose'); rose.innerHTML = '🌹';
             rose.style.left = Math.random() * 95 + 'vw';
             rose.style.animationDuration = (Math.random() * 8 + 6) + 's';
             document.getElementById('page-one').appendChild(rose);
@@ -187,7 +193,7 @@
 
         function revealFriendship() {
             const audio = document.getElementById('magicSound');
-            audio.play().catch(() => {});
+            audio.play().catch(() => {}); // Catch mobile blocks
             document.getElementById('page-one').style.display = 'none';
             document.getElementById('page-two').style.display = 'flex';
             setInterval(createParticles, 150);

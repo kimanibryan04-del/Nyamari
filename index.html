@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>To The Devil's Daughter</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500;1,700&family=IM+Fell+English+SC&family=Lobster&family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
+    <link rel="icon" href="devil.png">
+
+    <style>
+        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #000; touch-action: manipulation; }
+
+        /* --- PAGE 1: MOODY GOTHIC --- */
+        #page-one {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.85)),
+                        url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1000&auto=format&fit=crop');
+            background-size: cover; background-position: center;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative;
+            padding: 20px; box-sizing: border-box;
+        }
+
+        .black-rose {
+            position: absolute; filter: grayscale(100%) brightness(15%) contrast(160%);
+            font-size: 28px; user-select: none; pointer-events: none; z-index: 1;
+            animation: floatAndFadeOne 12s linear forwards;
+        }
+
+        @keyframes floatAndFadeOne {
+            0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.6; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+
+        .circle-frame {
+            width: 240px; height: 240px; border-radius: 50%; border: 5px solid rgba(163, 139, 139, 0.4);
+            overflow: hidden; box-shadow: 0 0 50px rgba(0,0,0,1); margin-bottom: 20px; z-index: 5; background: #111;
+        }
+
+        .circle-frame img { width: 100%; height: 100%; object-fit: cover; filter: sepia(0.4) contrast(1.1); }
+
+        .title-shrek { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-style: italic; color: #c4a4a4; text-shadow: 2px 2px 4px rgba(0,0,0,0.9); margin: 10px 0; z-index: 5; }
+
+        .gothic-bat-btn {
+            position: relative; background: #1a1717; color: #c4a4a4; font-family: 'IM Fell English SC', serif;
+            font-size: 1rem; text-transform: uppercase; letter-spacing: 2px; padding: 18px 40px;
+            cursor: pointer; z-index: 10; margin-top: 15px; border: 1px solid rgba(196, 164, 164, 0.5);
+            clip-path: polygon(10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%, 0% 50%);
+            transition: 0.3s; -webkit-tap-highlight-color: transparent;
+        }
+
+        .gothic-bat-btn::after {
+            content: "🦇 🦇 🦇 🦇"; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            font-size: 0.7rem; color: rgba(196, 164, 164, 0.2); display: flex; justify-content: center; align-items: center;
+        }
+
+        .gothic-bat-btn:active { transform: scale(0.95); background: #2b2525; }
+
+        @keyframes gothicVibrate { 0% { transform: translate(0); } 50% { transform: translate(-2px, 2px); } 100% { transform: translate(2px, -2px); } }
+        .gothic-bat-btn:hover { animation: gothicVibrate 0.15s linear infinite; color: #fff; border-color: #fff; }
+
+        /* --- PAGE 2: SOFT AESTHETIC REVEAL --- */
+        #page-two {
+            height: 100vh; display: none; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+            background: radial-gradient(circle, #ffdee9 0%, #ff9a9e 100%);
+            position: relative; overflow: hidden; padding: 20px; box-sizing: border-box;
+        }
+
+        .friendship-box {
+            width: 90%; max-width: 340px;
+            max-height: 80vh; /* Keeps the box from getting too tall on phones */
+            background: white; border: 12px solid #ff69b4; border-radius: 10px;
+            padding: 25px; position: relative; z-index: 100; box-shadow: 0 15px 40px rgba(255, 105, 180, 0.3);
+            animation: boxEnter 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex; flex-direction: column; /* Allows internal scrolling to work better */
+        }
+
+        .friendship-box::after {
+            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 50%, rgba(255,255,255,0.1) 100%);
+            pointer-events: none; z-index: 105;
+        }
+
+        @keyframes boxEnter { 0% { transform: translateY(30px) scale(0.9); opacity: 0; } 100% { transform: translateY(0) scale(1); opacity: 1; } }
+
+        .friendship-logo { font-family: 'Lobster', cursive; color: #ff69b4; font-size: 2.8rem; margin: 0; transform: rotate(-3deg); filter: drop-shadow(2px 2px 0px #fff); flex-shrink: 0; }
+
+        /* --- UPDATED SCROLLABLE CONTENT --- */
+        .message-content {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-weight: 500;
+            color: #555; font-size: 1.15rem; line-height: 1.6;
+            margin-top: 20px; padding: 15px; border: 1px solid #ffe4e1; border-radius: 12px; background: #fffafb;
+
+            overflow-y: auto; /* ENABLES SCROLL */
+            text-align: left;
+            -webkit-overflow-scrolling: touch; /* Smooth scroll for iPhones */
+        }
+
+        /* CUSTOM PINK SCROLLBAR */
+        .message-content::-webkit-scrollbar { width: 6px; }
+        .message-content::-webkit-scrollbar-track { background: #fffafb; }
+        .message-content::-webkit-scrollbar-thumb { background: #ffb6c1; border-radius: 10px; }
+
+        .barbie-particle {
+            position: absolute; pointer-events: none; z-index: 1;
+            animation: floatUpBarbie 4s linear forwards;
+        }
+
+        @keyframes floatUpBarbie {
+            0% { transform: translateY(110vh) scale(0.6) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1.3) rotate(360deg); opacity: 0; }
+        }
+
+        @media (max-width: 480px) {
+            .circle-frame { width: 180px; height: 180px; }
+            .title-shrek { font-size: 1.8rem; }
+            .friendship-box { padding: 20px; width: 85%; }
+            .friendship-logo { font-size: 2.4rem; }
+            .message-content { font-size: 1.05rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="magicSound" src="https://www.soundjay.com/buttons/sounds/magic-chime-01.mp3" preload="auto"></audio>
+
+    <section id="page-one">
+        <div class="circle-frame">
+            <img src="nyamari.webp" alt="Dearest Shrek">
+        </div>
+        <h1 class="title-shrek">For my dearest Shrek...</h1>
+        <p style="color: #7a6b6b; max-width: 280px; font-style: italic; font-size: 0.9rem;">The most annoying ogre in the swamp. I actually can't believe I'm doing this.</p>
+        <button class="gothic-bat-btn" onclick="revealFriendship()">Repair Your Sanity</button>
+    </section>
+
+    <section id="page-two">
+        <div class="friendship-box">
+            <h1 class="friendship-logo">Friendship</h1>
+            <div class="message-content">
+                The first day we met, I honestly thought we would never be friends at all! 🙅🏾‍♂️
+                I really thought you’d just blow me off, but I took a risk just to try and make
+                at least one friend in Ruai 🏠 since I was already so bored with the place (and my life!).
+                <br><br>
+                I’ll never forget that day because it actually turned out to be the best decision of my life! ✨
+                I don’t regret it for a second. Every single day with you has been so much fun, and
+                I always hope the laughs never end. ♾️💖
+                <br><br>
+                Even though there are times I regret meeting you (because you're a lot! 😂🤪),
+                I still want to enjoy every single moment we have. 📸🌸
+                <br><br>
+                In short, all I want to say is thank you for everything! 🎁✨
+                I hope our friendship stays exactly as it is and never, ever fades. 👯‍♀️
+                Love you, Bestie! 🎀✨
+                <br><br>
+                Here's to more chaos, more laughs, and more days of me wondering how I haven't blocked you yet. 🥂✨
+            </div>
+            <p style="color: aqua; font-size: 0.6rem; font-family: 'Montserrat', sans-serif; margin-top: 15px; letter-spacing: 2px; flex-shrink: 0;">BEST FRIEND EDITION | MADE WITH LOVE</p>
+        </div>
+    </section>
+
+    <script>
+        function createBlackRose() {
+            if (document.getElementById('page-one').style.display === 'none') return;
+            const rose = document.createElement('div');
+            rose.classList.add('black-rose');
+            rose.innerHTML = '🌹';
+            rose.style.left = Math.random() * 95 + 'vw';
+            rose.style.animationDuration = (Math.random() * 8 + 6) + 's';
+            document.getElementById('page-one').appendChild(rose);
+            setTimeout(() => rose.remove(), 12000);
+        }
+
+        function createParticles() {
+            const symbols = ['💖', '✨', '☁️', '🌸', '🤍', '⭐'];
+            const p = document.createElement('div');
+            p.classList.add('barbie-particle');
+            p.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
+            p.style.left = Math.random() * 95 + 'vw';
+            p.style.animationDuration = (Math.random() * 2.5 + 2.5) + 's';
+            p.style.fontSize = (Math.random() * 20 + 20) + 'px';
+            document.getElementById('page-two').appendChild(p);
+            setTimeout(() => p.remove(), 5000);
+        }
+
+        function revealFriendship() {
+            const audio = document.getElementById('magicSound');
+            audio.play().catch(() => {});
+            document.getElementById('page-one').style.display = 'none';
+            document.getElementById('page-two').style.display = 'flex';
+            setInterval(createParticles, 150);
+        }
+
+        setInterval(createBlackRose, 1000);
+    </script>
+</body>
+</html>
